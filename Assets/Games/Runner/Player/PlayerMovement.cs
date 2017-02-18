@@ -7,23 +7,28 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public string movementPort = "COM3";
+    public string directionPort = "COM4";
+    private SerialPort movementSerial;
+    private SerialPort directionSerial;
 
-    private float acceleration;
-    private bool addForce = false;
-    private SerialPort stream = new SerialPort("COM4", 9600);
     public Rigidbody rb;
+    private bool addForce = false;
+    private float acceleration;
 
-    public int horizontalSpeed = 10;
     public float limits = 4.5f;
+    public int horizontalSpeed = 10;
     private bool moveLeft = false;
     private bool moveRight = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        stream.Open();
-        Thread t1 = new Thread(serialRead);
+
+        Thread t1 = new Thread(movementThread);
+        Thread t2 = new Thread(directionThread);
         t1.Start();
+        t2.Start();
     }
 
     void Update()
@@ -47,41 +52,45 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void serialRead()
+    void movementThread()
     {
-        while (true)
-        {
-            string value = stream.ReadLine();
-
-            if (value[0] == 'l' || value[0] == 'r')
-                directionRead(value);
-            else
-                movementRead(value);
-                
-            stream.BaseStream.Flush();
+        movementSerial = new SerialPort(movementPort, 9600);
+        movementSerial.Open();
+        while (true){
+            string value = movementSerial.ReadLine();
+            acceleration = Convert.ToSingle(value);
+            addForce = true;
+            movementSerial.BaseStream.Flush();
         }
-
     }
 
-    void directionRead(string value)
+    void directionThread()
     {
-        bool status;
-        if (value[1] == '1')
-            status = true;
-        else
-            status = false;
+        directionSerial = new SerialPort(directionPort, 9600);
+        directionSerial.Open();
+        while (true){
+            string value = directionSerial.ReadLine();
+            bool status;
+            if (value[1] == '1')
+                status = true;
+            else
+                status = false;
 
-        if (value[0] == 'l')
-            moveLeft = status;
-        else
-            moveRight = status;
+            if (value[0] == 'l')
+                moveLeft = status;
+            else
+                moveRight = status;
 
+            directionSerial.BaseStream.Flush();
+        }
     }
 
-    void movementRead(string value)
+    public void OnApplicationQuit()
     {
-        acceleration = Convert.ToSingle(value);
-        addForce = true;
-    }
+        if (movementSerial != null && movementSerial.IsOpen)
+            movementSerial.Close();
+        if (directionSerial != null && directionSerial.IsOpen)
+            directionSerial.Close();
 
+    }
 }
