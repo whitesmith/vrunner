@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector3(0, 0, 15);
+        //rb.velocity = new Vector3(0, 0, 15);
         if (addForce)
         {
             rb.AddForce(new Vector3(0, 0, acceleration * 100 * rb.mass));
