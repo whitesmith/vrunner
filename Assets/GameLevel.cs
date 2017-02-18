@@ -60,6 +60,8 @@ public class GameLevel : MonoBehaviour {
         else
             prefab = prefabs[0].prefab;
 
-        return Instantiate(prefab, position, Quaternion.identity);
+        Transform i = Instantiate(prefab, position, Quaternion.identity);
+        //i.eulerAngles = new Vector3(-90, 0, 0);
+        return i;
     }
 }
