@@ -22,9 +22,13 @@ public class PlayerMovement : MonoBehaviour
     private bool moveRight = false;
 
     private GameLogic gameLogic;
+    public Transform wasted;
+    private MeshRenderer wastedRender;
 
     public AudioClip[] impacts;
     public AudioSource impactPlayerSource;
+    public AudioSource wastedPlayerSource;
+    public AudioSource musicPlayerSource;
 
 
     void Start()
@@ -36,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
         Thread t2 = new Thread(directionThread);
         t1.Start();
         t2.Start();
+
+        wastedRender = wasted.GetComponent<MeshRenderer>();
     }
 
     void Update()
@@ -103,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
+        Debug.Log("HIT");
         if (other.gameObject.CompareTag ("Beer")) {
             gameLogic.Drunkness += gameLogic.BeerStep;
             gameLogic.Score += 1;
@@ -111,9 +118,17 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag ("Water"))
         {
             gameLogic.Drunkness -= gameLogic.WaterStep;
-            other.gameObject.SetActive (false);
+            other.gameObject.SetActive(false);
             PlayImpactSound();
         }
+    }
+
+    void OnCollisionEnter(Collision other) {
+        if (other.gameObject.CompareTag ("Security") || other.gameObject.CompareTag ("Car")) {
+            wastedRender.enabled = true;
+            wastedPlayerSource.Play();
+            musicPlayerSource.Pause();
+        }        
     }
 
     void PlayImpactSound() {
