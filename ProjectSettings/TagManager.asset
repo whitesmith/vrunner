@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Beer
+  - Water
+  - Security
+  - Car
   layers:
   - Default
   - TransparentFX

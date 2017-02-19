@@ -21,8 +21,11 @@ public class PlayerMovement : MonoBehaviour
     private bool moveLeft = false;
     private bool moveRight = false;
 
+    private GameLogic gameLogic;
+
     void Start()
     {
+        gameLogic = GameObject.Find("GameLogic").GetComponent<GameLogic>();
         rb = GetComponent<Rigidbody>();
 
         Thread t1 = new Thread(movementThread);
@@ -33,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector3(0, 0, 15);
+        //rb.velocity = new Vector3(0, 0, 15);
         if (addForce)
         {
             rb.AddForce(new Vector3(0, 0, acceleration * 100 * rb.mass));
@@ -94,12 +97,19 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other) 
     {
-        foreach (ContactPoint contact in collision.contacts)
+        if (other.gameObject.CompareTag ("Beer"))
         {
-            GameObject.Find("GameLogic").GetComponent<GameLogic>().gameOver();
+            gameLogic.Drunkness += gameLogic.BeerStep;
+            gameLogic.Score += 1;
+            other.gameObject.SetActive (false);
         }
-
+        if (other.gameObject.CompareTag ("Water"))
+        {
+            gameLogic.Drunkness -= gameLogic.WaterStep;
+            other.gameObject.SetActive (false);
+        }
     }
+
 }

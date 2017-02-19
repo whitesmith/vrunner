@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 114101180083359326}
   m_Layer: 0
   m_Name: Security
-  m_TagString: Untagged
+  m_TagString: Security
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2398,6 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe2bb67837ecfab409d6fdf2c20ff9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
 --- !u!136 &136263449018026124
 CapsuleCollider:
   m_ObjectHideFlags: 1

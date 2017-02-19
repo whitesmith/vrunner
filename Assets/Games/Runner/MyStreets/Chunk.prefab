@@ -11279,4 +11279,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   probability: 0.05
-  prefab: {fileID: 4266567712375398, guid: 870978fd9902aa44d8d34bfa466d57dc, type: 2}
+  probabilityWater: 0.3
+  beer: {fileID: 4587015123370424, guid: 870978fd9902aa44d8d34bfa466d57dc, type: 2}
+  water: {fileID: 4410185330329168, guid: 396100ce862eb6e4682ada8789ea9241, type: 2}
