@@ -114,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
             gameLogic.Drunkness += gameLogic.BeerStep;
             gameLogic.Score += 1;
             other.gameObject.SetActive (false);
+            PlayImpactSound();
         }
         if (other.gameObject.CompareTag ("Water"))
         {
