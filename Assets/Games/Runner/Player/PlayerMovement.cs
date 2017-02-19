@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
 
     private GameLogic gameLogic;
 
+    public AudioClip[] impacts;
+    public AudioSource impactPlayerSource;
+
+
     void Start()
     {
         gameLogic = GameObject.Find("GameLogic").GetComponent<GameLogic>();
@@ -99,8 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.CompareTag ("Beer"))
-        {
+        if (other.gameObject.CompareTag ("Beer")) {
             gameLogic.Drunkness += gameLogic.BeerStep;
             gameLogic.Score += 1;
             other.gameObject.SetActive (false);
@@ -109,7 +112,15 @@ public class PlayerMovement : MonoBehaviour
         {
             gameLogic.Drunkness -= gameLogic.WaterStep;
             other.gameObject.SetActive (false);
+            PlayImpactSound();
         }
+    }
+
+    void PlayImpactSound() {
+        int randClip = UnityEngine.Random.Range (0, impacts.Length);
+        impactPlayerSource.clip = impacts [randClip];
+
+        impactPlayerSource.Play ();
     }
 
 }

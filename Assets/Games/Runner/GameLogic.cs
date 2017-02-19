@@ -14,17 +14,28 @@ public class GameLogic : MonoBehaviour {
     public float End = 100f;
     public float BeerStep = 10f;
     public float WaterStep = 5f;
-    public float TimeStep = 10f;
+    public float TimeStep = 3f;
 
     public string m_SceneToLoad;
+    public AudioSource musicPlayer;
 
 	void Start () {
 		
 	}
 	
-	void Update () {
-		
-	}
+void Update() {
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            if (Time.timeScale == 1.0F){
+                Time.timeScale = 0.0F;
+                musicPlayer.Pause();
+            }
+            else{
+                Time.timeScale = 1.0F;
+                musicPlayer.Play();
+            }
+            Time.fixedDeltaTime = Time.timeScale;
+        }
+    }
 
     public void gameOver()
     {

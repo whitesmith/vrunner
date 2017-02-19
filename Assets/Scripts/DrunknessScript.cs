@@ -3,15 +3,19 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityStandardAssets.ImageEffects;
 
 public class DrunknessScript : MonoBehaviour {
     public Slider m_Slider;
+    public Transform camera;
 
     private GameLogic gameLogic;
+    private BlurOptimized blur;
 
 
     private void OnEnable () {
         gameLogic = GameObject.Find("GameLogic").GetComponent<GameLogic>();
+        blur = camera.GetComponent<BlurOptimized>();
 
         gameLogic.Drunkness = gameLogic.StartDrunk;
         SetSliderValue(gameLogic.StartDrunk / gameLogic.End);
@@ -35,6 +39,15 @@ public class DrunknessScript : MonoBehaviour {
             PlayerPrefs.SetInt("Score", gameLogic.Score);
             gameLogic.gameOver();
         }
+
+        if(gameLogic.Drunkness >= 50) {
+            blur.blurSize = gameLogic.Drunkness / 40;
+        }
+        else {
+            blur.blurSize = 0;
+        }
+
+        
         SetSliderValue(gameLogic.Drunkness / gameLogic.End);
     }
 
