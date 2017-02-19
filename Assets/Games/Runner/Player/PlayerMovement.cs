@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //rb.velocity = new Vector3(0, 0, 15);
+        rb.velocity = new Vector3(0, 0, 15);
         if (addForce)
         {
             rb.AddForce(new Vector3(0, 0, acceleration * 100 * rb.mass));
@@ -91,6 +91,15 @@ public class PlayerMovement : MonoBehaviour
             movementSerial.Close();
         if (directionSerial != null && directionSerial.IsOpen)
             directionSerial.Close();
+
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            GameObject.Find("GameLogic").GetComponent<GameLogic>().gameOver();
+        }
 
     }
 }

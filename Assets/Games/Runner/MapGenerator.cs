@@ -3,24 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public struct ChunkProbability
-{
+public class MapGenerator : MonoBehaviour {
+
+    public GameLogic gameLogic;
     public Transform prefab;
-    public float probability;
-}
-
-public class GameLevel : MonoBehaviour {
-
-    public ChunkProbability[] prefabs;
     public Transform player;
     private List<Transform> chunks = new List<Transform>();
 
-    public int renderDistance = 6;
+    public int renderDistance = 8;
     public int chunkLength = 16;
 
     void Start () {
-        chunks.Add(InstantiateChunk(this.transform.position));
+        gameLogic = GameObject.Find("GameLogic").GetComponent<GameLogic>();
+
+        Transform last = InstantiateChunk(this.transform.position, true);
+        chunks.Add(last);
+
+        for (int i = 0; i < renderDistance; i++)
+        {
+            last = InstantiateChunk(last.position + transform.forward * chunkLength, true);
+            chunks.Add(last);
+        }
 	}
 	
 	void Update () {
@@ -40,28 +43,23 @@ public class GameLevel : MonoBehaviour {
 
     void ClearChunks()
     {
-        foreach (Transform chunk in chunks)
+        for (int i = 0; i < chunks.Count; i++)
         {
+            Transform chunk = chunks[i];
             if(chunk.position.z < player.transform.position.z - chunkLength * renderDistance)
             {
-                Destroy(chunk.gameObject);
                 chunks.Remove(chunk);
+                Destroy(chunk.gameObject);
+                i--;
             } 
         }
     }
 
-    Transform InstantiateChunk(Vector3 position)
+    Transform InstantiateChunk(Vector3 position, bool preRender = false)
     {
-        Transform prefab;
-        int val = UnityEngine.Random.Range(1, 100);
-
-        if (val <= prefabs[1].probability * 100)
-            prefab = prefabs[1].prefab;
-        else
-            prefab = prefabs[0].prefab;
-
         Transform i = Instantiate(prefab, position, Quaternion.identity);
-        //i.eulerAngles = new Vector3(-90, 0, 0);
+        if (!preRender)
+            gameLogic.level++;
         return i;
     }
 }

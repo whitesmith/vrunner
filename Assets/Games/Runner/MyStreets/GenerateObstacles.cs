@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class GenerateObstacles : MonoBehaviour {
 
-    public Transform[] prefabs;
-	// Use this for initialization
+    public Transform prefab;
+    private int level;
+
 	void Start () {
-        Transform prefab;
-        int val = UnityEngine.Random.Range(1, 100);
-        if (val <= 20) {
-            prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
-            Transform obstacle = Instantiate(prefab, transform.position, Quaternion.identity);
-            obstacle.transform.parent = gameObject.transform;
-        }
+        level = GameObject.Find("GameLogic").GetComponent<GameLogic>().level;
+
+        int val = UnityEngine.Random.Range(level/5, 5);
+        if (val < 4 || level == 0)
+            return;
+
+        int lane = UnityEngine.Random.Range(-1, 2);
+        Transform a = Instantiate(prefab, transform.position + Vector3.right*lane*3.2f, Quaternion.identity);
+        a.eulerAngles = new Vector3(0, 180, 0);
 	}
 }
