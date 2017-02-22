@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //rb.velocity = new Vector3(0, 0, 15);
         if (addForce)
         {
             rb.AddForce(new Vector3(0, 0, acceleration * 100 * rb.mass));
@@ -59,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
             newPosition += this.transform.right * horizontalSpeed * Time.deltaTime;
         if (moveLeft || Input.GetKey("left"))
             newPosition -= this.transform.right * horizontalSpeed * Time.deltaTime;
+        if (Input.GetKey("up"))
+            newPosition += this.transform.forward * horizontalSpeed * Time.deltaTime;
 
         if (newPosition.x < limits && newPosition.x > -limits)
             this.transform.position = newPosition;
@@ -109,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        Debug.Log("HIT");
         if (other.gameObject.CompareTag ("Beer")) {
             gameLogic.Drunkness += gameLogic.BeerStep;
             gameLogic.Score += 1;

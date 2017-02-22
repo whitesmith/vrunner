@@ -414,7 +414,7 @@ Prefab:
     - target: {fileID: 114989433329804078, guid: e2e81d32a23a4554e893bda457beb920,
         type: 2}
       propertyPath: probability
-      value: 0.07
+      value: 0.06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2e81d32a23a4554e893bda457beb920, type: 2}
@@ -2642,7 +2642,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4e7abf50ceb980844b31546a1ef90f03, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3540,7 +3540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4857612348179534, guid: 657f382930e8cf24ba3ca8a9ad336a41, type: 2}
-  delay: 7
+  delay: 5
 --- !u!1 &1555301150
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,7 +4532,7 @@ Prefab:
     - target: {fileID: 114469104946115332, guid: e22d84ae60a0a7a47bb6f92be05211aa,
         type: 2}
       propertyPath: m_SceneToLoad
-      value: GameOver
+      value: Runner
       objectReference: {fileID: 0}
     - target: {fileID: 114469104946115332, guid: e22d84ae60a0a7a47bb6f92be05211aa,
         type: 2}
@@ -4544,6 +4544,11 @@ Prefab:
       propertyPath: musicPlayer
       value: 
       objectReference: {fileID: 1027386452}
+    - target: {fileID: 114469104946115332, guid: e22d84ae60a0a7a47bb6f92be05211aa,
+        type: 2}
+      propertyPath: BeerStep
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e22d84ae60a0a7a47bb6f92be05211aa, type: 2}
   m_IsPrefabParent: 0

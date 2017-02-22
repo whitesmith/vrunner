@@ -11278,7 +11278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0a0d07383d51342b9ab93aba0f70f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  probability: 0.01
+  probability: 0.06
   probabilityWater: 0.3
   beer: {fileID: 4587015123370424, guid: 870978fd9902aa44d8d34bfa466d57dc, type: 2}
   water: {fileID: 4410185330329168, guid: 396100ce862eb6e4682ada8789ea9241, type: 2}

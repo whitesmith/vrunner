@@ -1655,7 +1655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SelectionSlider: {fileID: 1138161144}
-  m_SceneToLoad: Menu
+  m_SceneToLoad: Runner
 --- !u!1 &1813455384
 GameObject:
   m_ObjectHideFlags: 0
