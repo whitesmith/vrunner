@@ -1,13 +1,14 @@
 #include <CapacitiveSensor.h>
 
 #define pinRight     2
-#define pinLeft      3
-#define pinReceiver  4
+#define pinLeft      4
+#define pinReceiver  3
 
-CapacitiveSensor   cs2 = CapacitiveSensor(pinReceiver,pinRight); 
-CapacitiveSensor   cs3 = CapacitiveSensor(pinReceiver,pinLeft);
+CapacitiveSensor   csR = CapacitiveSensor(pinReceiver,pinRight); 
+CapacitiveSensor   csL = CapacitiveSensor(pinReceiver,pinLeft);
 
 int wait = 10;
+int limit = 100;
 
 // Buttons Flags
 
@@ -22,17 +23,18 @@ bool lFlag = false;
 void setup()                    
 {
   Serial.begin(9600);
+  //Serial.println("Init");
 }
 
 void loop()                    
 {
   
-  long bRight =  cs2.capacitiveSensor(30);
-  long bLeft =  cs3.capacitiveSensor(30);
+  long bRight =  csR.capacitiveSensor(30);
+  long bLeft =  csL.capacitiveSensor(30);
   
   // Right Arrow
 
-  if (bRight > 1000) {
+  if (bRight > limit) {
     rState = true;
   } else {
     rState = false;
@@ -46,7 +48,7 @@ void loop()
 
   // Left Arrow
   
-  if (bLeft > 1000) {
+  if (bLeft > limit) {
     lState = true;
   } else {
     lState = false;
