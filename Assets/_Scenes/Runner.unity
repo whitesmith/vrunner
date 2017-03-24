@@ -411,11 +411,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114989433329804078, guid: e2e81d32a23a4554e893bda457beb920,
-        type: 2}
-      propertyPath: probability
-      value: 0.06
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2e81d32a23a4554e893bda457beb920, type: 2}
   m_IsPrefabParent: 0
@@ -3893,8 +3888,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d67839ea40fb84d8e449ad9abe0882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementPort: COM4
-  directionPort: COM5
+  movementPort: COM7
+  directionPort: COM6
   rb: {fileID: 0}
   limits: 4
   horizontalSpeed: 10

@@ -108,6 +108,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void OnDestroy()
+    {
+        if (movementSerial != null && movementSerial.IsOpen)
+            movementSerial.Close();
+        if (directionSerial != null && directionSerial.IsOpen)
+            directionSerial.Close();
+
+    }
+
     void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.CompareTag ("Beer")) {
