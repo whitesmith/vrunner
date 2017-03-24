@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveLeft || Input.GetKey("left"))
             newPosition -= this.transform.right * horizontalSpeed * Time.deltaTime;
         if (Input.GetKey("up"))
-            newPosition += this.transform.forward * horizontalSpeed * Time.deltaTime;
+            newPosition += this.transform.forward * horizontalSpeed * 3 * Time.deltaTime;
 
         if (newPosition.x < limits && newPosition.x > -limits)
             this.transform.position = newPosition;
