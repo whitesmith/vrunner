@@ -8,7 +8,7 @@ CapacitiveSensor   csR = CapacitiveSensor(pinReceiver,pinRight);
 CapacitiveSensor   csL = CapacitiveSensor(pinReceiver,pinLeft);
 
 int wait = 10;
-int limit = 100;
+int limit = 750;
 
 // Buttons Flags
 
@@ -29,8 +29,9 @@ void setup()
 void loop()                    
 {
   
-  long bRight =  csR.capacitiveSensor(30);
-  long bLeft =  csL.capacitiveSensor(30);
+  long bRight =  csR.capacitiveSensor(50);
+  //Serial.println(bRight);
+  long bLeft =  csL.capacitiveSensor(50);
   
   // Right Arrow
 
@@ -42,6 +43,11 @@ void loop()
 
   if (rState != rStateLast) {
     Serial.print("r");
+    /*
+    Serial.print("\t");
+    Serial.print(bRight);
+    Serial.print("\t");
+    */
     Serial.println(rState);
   }
   rStateLast = rState;
